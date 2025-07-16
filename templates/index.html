@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mock Interview AI</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <h1>Mock Interview AI</h1>
+
+  <label for="question">Select a Question:</label>
+  <select id="question">
+    {% for q in questions %}
+      <option value="{{ q.id }}">{{ q.question }}</option>
+    {% endfor %}
+  </select>
+
+  <br><br>
+  <button onclick="startRecording()">Start Recording</button>
+  <button onclick="stopRecording()">Stop & Upload</button>
+
+  <p id="status"></p>
+  <p><strong>Transcript:</strong> <span id="transcript"></span></p>
+  <p><strong>Score:</strong> <span id="score"></span>/5</p>
+  <p><strong>Feedback:</strong> <span id="feedback"></span></p>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>

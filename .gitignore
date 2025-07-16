@@ -1,0 +1,12 @@
+# Ignore Python virtual environment
+venv/
+__pycache__/
+*.pyc
+
+# Ignore audio or temp files
+*.wav
+*.mp3
+uploads/
+
+# Ignore OS/system files
+.DS_Store

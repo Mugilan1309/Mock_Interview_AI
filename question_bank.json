@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "question": "Tell me about yourself.",
+    "type": "HR",
+    "expected_keywords": ["background", "education", "skills", "goals"]
+  },
+  {
+    "id": 2,
+    "question": "What is a foreign key in DBMS?",
+    "type": "Technical",
+    "expected_keywords": ["relational", "reference", "constraint", "primary key"]
+  }
+]

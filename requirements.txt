@@ -1,0 +1,6 @@
+flask
+transformers
+torch
+whisper
+scipy
+soundfile
