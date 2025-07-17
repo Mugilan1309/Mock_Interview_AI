@@ -1,29 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Mock Interview AI</title>
-  <link rel="stylesheet" href="/static/style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mock Interview AI</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/static/style.css" />
 </head>
 <body>
-  <h1>Mock Interview AI</h1>
+    <main class="container">
+        <h1>Mock Interview AI 🤖</h1>
+        <p class="subtitle">Hone your skills with AI-driven feedback.</p>
 
-  <label for="question">Select a Question:</label>
-  <select id="question">
-    {% for q in questions %}
-      <option value="{{ q.id }}">{{ q.question }}</option>
-    {% endfor %}
-  </select>
+        <div id="domain-selection">
+            <label for="domain">Select an Interview Domain:</label>
+            <select id="domain">
+                {% for domain in domains %}
+                <option value="{{ domain }}">{{ domain }}</option>
+                {% endfor %}
+            </select>
+            <button onclick="startInterview()">Start Interview</button>
+        </div>
 
-  <br><br>
-  <button onclick="startRecording()">Start Recording</button>
-  <button onclick="stopRecording()">Stop & Upload</button>
+        <div id="interview-screen" style="display: none;">
+            <p id="question-counter"></p>
+            <h2 id="question-text"></h2>
+            
+            <div class="button-group">
+                <button id="start-btn" onclick="startRecording()">Start Recording</button>
+                <button id="stop-btn" onclick="stopRecording()" disabled>Stop & Get Feedback</button>
+            </div>
+            
+            <p id="status"></p>
 
-  <p id="status"></p>
-  <p><strong>Transcript:</strong> <span id="transcript"></span></p>
-  <p><strong>Score:</strong> <span id="score"></span>/5</p>
-  <p><strong>Feedback:</strong> <span id="feedback"></span></p>
+            <div id="results" style="display: none;">
+                <p><strong>Transcript:</strong> <span id="transcript"></span></p>
+                <p><strong>Score:</strong> <span id="score"></span>/5</p>
+                <p><strong>Feedback:</strong> <span id="feedback"></span></p>
+                <button id="next-btn" onclick="askNextQuestion()">Next Question</button>
+            </div>
+        </div>
+        
+        <div id="summary-screen" style="display: none;">
+            <h2>Interview Complete! 🎉</h2>
+            <p>Well done. You've completed the interview for this domain.</p>
+            <p class="final-score-container">
+                <strong>Final Average Score: <span id="final-score"></span>/5</strong>
+            </p>
+            <button onclick="window.location.reload()">Start a New Interview</button>
+        </div>
+    </main>
 
-  <script src="/static/script.js"></script>
+    <script src="/static/script.js"></script>
 </body>
 </html>

@@ -1,14 +1,256 @@
-[
-  {
-    "id": 1,
-    "question": "Tell me about yourself.",
-    "type": "HR",
-    "expected_keywords": ["background", "education", "skills", "goals"]
-  },
-  {
-    "id": 2,
-    "question": "What is a foreign key in DBMS?",
-    "type": "Technical",
-    "expected_keywords": ["relational", "reference", "constraint", "primary key"]
-  }
-]
+{
+  "Technical": [
+    {
+      "id": 101,
+      "question": "What is the difference between an array and a linked list?",
+      "expected_keywords": ["array", "linked list", "contiguous memory", "dynamic size", "pointers", "nodes"]
+    },
+    {
+      "id": 102,
+      "question": "Explain hash tables and their collision resolution techniques.",
+      "expected_keywords": ["hash table", "key-value", "hash function", "collision", "chaining", "open addressing"]
+    },
+    {
+      "id": 103,
+      "question": "What is object-oriented programming? Explain its main principles.",
+      "expected_keywords": ["OOP", "objects", "classes", "inheritance", "polymorphism", "encapsulation", "abstraction"]
+    },
+    {
+      "id": 104,
+      "question": "What is the difference between a stack and a queue?",
+      "expected_keywords": ["stack", "queue", "LIFO", "FIFO", "data structure", "operations"]
+    },
+    {
+      "id": 105,
+      "question": "What are the different types of sorting algorithms?",
+      "expected_keywords": ["sorting", "bubble sort", "merge sort", "quick sort", "complexity", "stability"]
+    },
+    {
+      "id": 106,
+      "question": "Explain the concept of recursion with an example.",
+      "expected_keywords": ["recursion", "base case", "recursive call", "function", "stack", "example"]
+    },
+    {
+      "id": 107,
+      "question": "What is a binary search tree and how is it used?",
+      "expected_keywords": ["binary search tree", "BST", "nodes", "left", "right", "insertion", "search"]
+    },
+    {
+      "id": 108,
+      "question": "What are the time complexities of common data structure operations?",
+      "expected_keywords": ["time complexity", "big O", "insert", "delete", "search", "data structures"]
+    },
+    {
+      "id": 109,
+      "question": "Describe the difference between procedural and object-oriented programming.",
+      "expected_keywords": ["procedural", "object-oriented", "functions", "classes", "reusability", "structure"]
+    },
+    {
+      "id": 110,
+      "question": "What is the purpose of a constructor in a class?",
+      "expected_keywords": ["constructor", "class", "object", "initialization", "instantiation", "method"]
+    },
+    {
+      "id": 111,
+      "question": "Explain the concept of inheritance with an example.",
+      "expected_keywords": ["inheritance", "parent", "child", "class", "reuse", "extends"]
+    },
+    {
+      "id": 112,
+      "question": "What is polymorphism in programming?",
+      "expected_keywords": ["polymorphism", "overloading", "overriding", "methods", "dynamic", "OOP"]
+    },
+    {
+      "id": 113,
+      "question": "How does memory management work in C++?",
+      "expected_keywords": ["memory management", "allocation", "deallocation", "pointers", "heap", "stack"]
+    },
+    {
+      "id": 114,
+      "question": "What is garbage collection in Java?",
+      "expected_keywords": ["garbage collection", "memory", "automatic", "Java", "heap", "cleanup"]
+    },
+    {
+      "id": 115,
+      "question": "Explain the difference between an interface and an abstract class.",
+      "expected_keywords": ["interface", "abstract class", "methods", "implementation", "inheritance"]
+    },
+    {
+      "id": 116,
+      "question": "What are design patterns? Name a few.",
+      "expected_keywords": ["design patterns", "singleton", "factory", "observer", "reusability", "architecture"]
+    },
+    {
+      "id": 117,
+      "question": "How does a compiler differ from an interpreter?",
+      "expected_keywords": ["compiler", "interpreter", "execution", "translation", "language", "performance"]
+    },
+    {
+      "id": 118,
+      "question": "What is multithreading and how is it implemented?",
+      "expected_keywords": ["multithreading", "concurrency", "threads", "parallelism", "synchronization"]
+    },
+    {
+      "id": 119,
+      "question": "Explain deadlock and how to prevent it.",
+      "expected_keywords": ["deadlock", "resources", "locking", "concurrency", "prevention", "avoidance"]
+    },
+    {
+      "id": 120,
+      "question": "What is a REST API and how does it work?",
+      "expected_keywords": ["REST", "API", "HTTP", "GET", "POST", "stateless", "resources"]
+    },
+    {
+      "id": 121,
+      "question": "What is normalization in databases?",
+      "expected_keywords": ["normalization", "database", "redundancy", "dependencies", "normal forms"]
+    },
+    {
+      "id": 122,
+      "question": "Explain ACID properties in databases.",
+      "expected_keywords": ["ACID", "atomicity", "consistency", "isolation", "durability", "transaction"]
+    },
+    {
+      "id": 123,
+      "question": "What is indexing in databases and why is it important?",
+      "expected_keywords": ["indexing", "database", "performance", "search", "query", "optimization"]
+    },
+    {
+      "id": 124,
+      "question": "What are the differences between SQL and NoSQL databases?",
+      "expected_keywords": ["SQL", "NoSQL", "relational", "schema", "scalability", "flexibility"]
+    },
+    {
+      "id": 125,
+      "question": "What is the difference between GET and POST methods in HTTP?",
+      "expected_keywords": ["GET", "POST", "HTTP", "methods", "request", "data", "URL", "body"]
+    }
+  ],
+  "HR": [
+    {
+      "id": 201,
+      "question": "Tell me about a time you had a conflict with a coworker and how you resolved it.",
+      "expected_keywords": ["conflict", "communication", "resolution", "teamwork", "empathy", "professionalism"]
+    },
+    {
+      "id": 202,
+      "question": "Where do you see yourself in five years?",
+      "expected_keywords": ["career goals", "growth", "ambition", "skills", "company", "long-term"]
+    },
+    {
+      "id": 203,
+      "question": "Why do you want to work for our company?",
+      "expected_keywords": ["research", "company values", "mission", "culture", "aligns with goals", "contribute"]
+    },
+    {
+      "id": 204,
+      "question": "Describe a challenging project and how you managed it.",
+      "expected_keywords": ["challenge", "project", "planning", "execution", "leadership", "problem-solving"]
+    },
+    {
+      "id": 205,
+      "question": "How do you handle pressure or tight deadlines?",
+      "expected_keywords": ["pressure", "stress", "time management", "prioritization", "focus", "calm"]
+    },
+    {
+      "id": 206,
+      "question": "What are your strengths and weaknesses?",
+      "expected_keywords": ["strengths", "weaknesses", "self-awareness", "improvement", "skills", "honest"]
+    },
+    {
+      "id": 207,
+      "question": "Tell me about a time you showed leadership.",
+      "expected_keywords": ["leadership", "initiative", "team", "motivation", "guidance", "decision"]
+    },
+    {
+      "id": 208,
+      "question": "How do you prioritize your tasks?",
+      "expected_keywords": ["prioritization", "time management", "organization", "focus", "urgency"]
+    },
+    {
+      "id": 209,
+      "question": "What motivates you at work?",
+      "expected_keywords": ["motivation", "goals", "recognition", "achievement", "purpose"]
+    },
+    {
+      "id": 210,
+      "question": "Describe a failure and what you learned from it.",
+      "expected_keywords": ["failure", "lesson", "reflection", "improvement", "resilience", "growth"]
+    },
+    {
+      "id": 211,
+      "question": "How do you handle constructive criticism?",
+      "expected_keywords": ["criticism", "feedback", "improvement", "acceptance", "growth"]
+    },
+    {
+      "id": 212,
+      "question": "Have you ever disagreed with a manager? How did you handle it?",
+      "expected_keywords": ["disagree", "manager", "respect", "communication", "resolution"]
+    },
+    {
+      "id": 213,
+      "question": "Describe your ideal work environment.",
+      "expected_keywords": ["environment", "team", "culture", "supportive", "collaborative", "productive"]
+    },
+    {
+      "id": 214,
+      "question": "What makes you unique?",
+      "expected_keywords": ["unique", "strengths", "skills", "qualities", "experience"]
+    },
+    {
+      "id": 215,
+      "question": "What do you know about our company?",
+      "expected_keywords": ["research", "values", "mission", "products", "industry"]
+    },
+    {
+      "id": 216,
+      "question": "How do you stay organized?",
+      "expected_keywords": ["organization", "tools", "planning", "task management", "discipline"]
+    },
+    {
+      "id": 217,
+      "question": "What do you like to do outside of work?",
+      "expected_keywords": ["hobbies", "interests", "balance", "passions", "activities"]
+    },
+    {
+      "id": 218,
+      "question": "Tell me about a time you went above and beyond.",
+      "expected_keywords": ["above and beyond", "initiative", "extra effort", "value", "recognition"]
+    },
+    {
+      "id": 219,
+      "question": "What are your salary expectations?",
+      "expected_keywords": ["salary", "expectations", "market", "negotiation", "range"]
+    },
+    {
+      "id": 220,
+      "question": "Are you willing to relocate?",
+      "expected_keywords": ["relocation", "flexibility", "move", "opportunity", "commitment"]
+    },
+    {
+      "id": 221,
+      "question": "How do you balance multiple responsibilities?",
+      "expected_keywords": ["multitasking", "balance", "time management", "focus", "efficiency"]
+    },
+    {
+      "id": 222,
+      "question": "Describe a time when you had to learn something quickly.",
+      "expected_keywords": ["learning", "adaptability", "quick", "new skill", "training"]
+    },
+    {
+      "id": 223,
+      "question": "What does success mean to you?",
+      "expected_keywords": ["success", "goals", "achievement", "impact", "values"]
+    },
+    {
+      "id": 224,
+      "question": "How do you ensure effective communication with team members?",
+      "expected_keywords": ["communication", "clarity", "listening", "tools", "collaboration"]
+    },
+    {
+      "id": 225,
+      "question": "Do you prefer to work independently or in a team?",
+      "expected_keywords": ["team", "independent", "collaboration", "autonomy", "flexibility"]
+    }
+  ]
+}
