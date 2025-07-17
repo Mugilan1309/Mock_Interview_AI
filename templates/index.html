@@ -4,10 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Mock Interview</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/style.css" />
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 <body>
     <main class="container">
@@ -44,20 +46,22 @@
                     <p><strong>Transcript:</strong> <span id="transcript"></span></p>
                     <p><strong>Score:</strong> <span id="score"></span>/5</p>
                     <p><strong>Feedback:</strong> <span id="feedback"></span></p>
+                    <p><strong>Body Language:</strong> <span id="body-language"></span></p>
                     <button id="next-btn" onclick="askNextQuestion()">Next Question</button>
                 </div>
             </div>
         </div>
 
-         <div id="summary-screen" style="display: none;">
-             <h2>Interview Complete! 🎉</h2>
-             <p>Well done!</p>
-             <p class="final-score-container">
-                 <strong>Final Average Score: <span id="final-score"></span>/5</strong>
-             </p>
-             <button onclick="window.location.reload()">Start a New Interview</button>
+        <div id="summary-screen" style="display: none;">
+            <h2>Interview Complete! 🎉</h2>
+            <p>Well done!</p>
+            <p class="final-score-container">
+                <strong>Final Average Score: <span id="final-score"></span>/5</strong>
+            </p>
+            <button onclick="window.location.reload()">Start a New Interview</button>
         </div>
     </main>
-    <script src="/static/script.js"></script>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

@@ -4,6 +4,7 @@ import json
 import random
 from whisper_transcribe.transcriber import transcribe_audio
 from models.bert_model import score_answer, generate_feedback
+from vision_analyzer import analyze_body_language
 
 app = Flask(__name__)
 UPLOAD_FOLDER = "uploads"
@@ -42,50 +43,56 @@ def start_interview():
         return jsonify(selected_questions)
     return jsonify({"error": "Domain not found"}), 404
 
+# No changes needed to your imports or other functions
+
 @app.route("/upload", methods=["POST"])
 def upload():
-    audio_file = request.files.get('audio')
+    # 1. Expect a 'video' file from the frontend
+    video_file = request.files.get('video')
     question_id = int(request.form.get('question_id'))
 
-    if not audio_file or not question_id:
-        return jsonify({"error": "Missing audio file or question ID"}), 400
+    if not video_file or not question_id:
+        return jsonify({"error": "Missing video file or question ID"}), 400
 
-    save_path = os.path.join(UPLOAD_FOLDER, "answer.wav")
-    audio_file.save(save_path)
+    # 2. Save the video file with its original extension (e.g., .webm)
+    save_path = os.path.join(UPLOAD_FOLDER, video_file.filename)
+    video_file.save(save_path)
     
     question_data = find_question_by_id(question_id)
     if not question_data:
         return jsonify({"error": "Question not found"}), 404
         
-    # Unpack both text and language from the function call
+    # --- Analysis Pipeline ---
+    # The analyzer and transcriber both work directly on the saved video file
+    body_language_feedback = analyze_body_language(save_path)
     transcribed, language = transcribe_audio(save_path)
 
-    # 1. Check for no answer
+    # Handle retry cases
     if not transcribed or not transcribed.strip():
         return jsonify({
             "status": "no_answer",
             "feedback": "No answer was detected. Please try recording again."
         })
     
-    # 2. ADD THIS: Check if the language is not English
     if language != 'en':
         return jsonify({
             "status": "wrong_language",
-            "transcript": transcribed, # Send transcript for user to see
+            "transcript": transcribed,
             "feedback": "Please answer in English. It seems you might have used another language."
         })
     
-    # This part only runs for successful English answers
+    # Process the valid answer
     expected_keywords = question_data["expected_keywords"]
     score = score_answer(transcribed, expected_keywords)
     feedback = generate_feedback(score)
     
+    # 3. Add the new body_language_feedback to the final response
     return jsonify({
         "status": "success",
-        "question": question_data["question"],
         "transcript": transcribed,
         "score": score,
-        "feedback": feedback
+        "feedback": feedback,
+        "body_language_feedback": body_language_feedback
     })
 
 if __name__ == "__main__":

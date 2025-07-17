@@ -149,46 +149,56 @@ function stopRecording() {
     stopBtn.disabled = true;
 }
 
-/**
+ /**
  * Uploads the recorded audio and processes the server's response.
  */
 async function uploadAndProcessAudio() {
-    const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-    const questionId = interviewQuestions[currentQuestionIndex - 1].id;
+  // The blob now contains both video and audio
+  const videoBlob = new Blob(audioChunks, { type: 'video/webm' });
+  const questionId = interviewQuestions[currentQuestionIndex - 1].id;
 
-    const formData = new FormData();
-    formData.append("audio", audioBlob, "answer.wav");
-    formData.append("question_id", questionId);
+  const formData = new FormData();
+  // Send the file as 'video' instead of 'audio'
+  formData.append("video", videoBlob, "answer.webm"); 
+  formData.append("question_id", questionId);
 
-    statusElem.innerText = "Analyzing your answer...";
+  statusElem.innerText = "Analyzing your answer and body language...";
 
-    try {
-        const res = await fetch("/upload", { method: "POST", body: formData });
-        if (!res.ok) throw new Error("Upload failed.");
-        
-        const data = await res.json();
-        
-        if (data.status === 'no_answer' || data.status === 'wrong_language') {
-            statusElem.innerText = data.feedback;
-            resultsDiv.style.display = "none";
-            startBtn.disabled = false;
-            stopBtn.disabled = true;
-            return; 
-        }
-
-        document.getElementById("transcript").innerText = data.transcript;
-        document.getElementById("score").innerText = data.score;
-        document.getElementById("feedback").innerText = data.feedback;
-        resultsDiv.style.display = "block";
-        
-        totalScores += data.score;
-        statusElem.innerText = "Feedback received.";
-
-    } catch (error) {
-        statusElem.innerText = `Error: ${error.message}`;
-        startBtn.disabled = false;
-        stopBtn.disabled = true;
+  try {
+    const res = await fetch("/upload", { method: "POST", body: formData });
+    if (!res.ok) throw new Error("Upload failed.");
+    
+    const data = await res.json();
+    
+    // --- CORRECTED LOGIC FOR RETRY CASES ---
+    if (data.status === 'no_answer' || data.status === 'wrong_language') {
+      // Update the status with the server's message
+      statusElem.innerText = data.feedback; 
+      // Hide the results area
+      resultsDiv.style.display = "none";
+      // Re-enable the recording buttons so you can try again
+      startBtn.disabled = false;
+      stopBtn.disabled = true;
+      // Exit the function
+      return; 
     }
+    // --- END OF FIX ---
+
+    // Update UI with all feedback for a successful answer
+    document.getElementById("transcript").innerText = data.transcript;
+    document.getElementById("score").innerText = data.score;
+    document.getElementById("feedback").innerText = data.feedback;
+    document.getElementById("body-language").innerText = data.body_language_feedback;
+    resultsDiv.style.display = "block";
+    
+    totalScores += data.score;
+    statusElem.innerText = "Feedback received.";
+
+  } catch (error) {
+    statusElem.innerText = `Error: ${error.message}`;
+    startBtn.disabled = false;
+    stopBtn.disabled = true;
+  }
 }
 
 /**
