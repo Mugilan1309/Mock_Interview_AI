@@ -18,46 +18,116 @@
     padding: 0;
 }
 
-body {
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden; /* Prevent scrollbars */
     font-family: 'Inter', sans-serif;
     background-color: var(--bg-dark);
-    color: var(--primary-text);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
 }
 
 /* --- Main Layout --- */
 .container {
-    background-color: var(--surface-dark);
-    padding: 30px 40px;
-    border-radius: 16px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
     width: 100%;
-    max-width: 650px;
-    text-align: center;
-    border: 1px solid var(--border-color);
+    height: 100%;
+    color: var(--primary-text);
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center initial selection screen */
+    align-items: center;
+    padding: 20px;
 }
 
-/* --- Typography --- */
+#domain-selection, #summary-screen {
+    width: 100%;
+    max-width: 650px; /* Keep selection/summary centered and readable */
+    text-align: center;
+}
+
+#interview-screen {
+    display: none; /* Initially hidden */
+    width: 100%;
+    height: 100%;
+    justify-content: space-between; /* Re-aligns content when active */
+    flex-direction: column;
+    gap: 20px;
+}
+
+.panels {
+    display: flex;
+    flex-grow: 1; /* Allows panels to fill available space */
+    gap: 20px;
+    min-height: 0; /* Flexbox fix to prevent overflow */
+}
+
+.panel {
+    flex: 1;
+    background-color: var(--surface-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+#interviewer-avatar {
+    width: 200px; /* Increased size */
+    height: 200px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    transition: all 0.2s;
+}
+
+#interviewer-avatar.speaking {
+    transform: scale(1.05);
+    box-shadow: 0 0 35px var(--accent-color);
+}
+
+#question-text {
+    font-size: 1.5rem; /* Increased size */
+    text-align: center;
+    color: var(--primary-text);
+    line-height: 1.5;
+}
+
+#user-video {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+    transform: scaleX(-1); /* Mirror effect */
+}
+
+.bottom-bar {
+    background-color: var(--surface-dark);
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    flex-shrink: 0; /* Prevent the bar from shrinking */
+}
+
+/* --- Typography & Other Elements (Largely unchanged) --- */
 h1 {
     color: white;
     margin-bottom: 8px;
-    font-size: 2rem;
+    font-size: 2.5rem;
 }
 
 h2 {
     font-weight: 500;
     line-height: 1.4;
     margin-bottom: 1rem;
+    font-size: 2rem;
 }
 
 .subtitle {
     color: var(--secondary-text);
     margin-bottom: 30px;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
 }
 
 label {
@@ -67,26 +137,7 @@ label {
     color: var(--secondary-text);
 }
 
-/* --- Buttons & Inputs --- */
-select {
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-    background-color: #2c2c2c;
-    color: var(--primary-text);
-    width: 100%;
-    margin-bottom: 20px;
-    transition: border-color 0.2s;
-}
-
-select:focus {
-    outline: none;
-    border-color: var(--accent-color);
-}
-
-button {
+select, button {
     font-family: 'Inter', sans-serif;
     font-size: 16px;
     padding: 12px 24px;
@@ -95,6 +146,17 @@ button {
     cursor: pointer;
     transition: all 0.2s ease-in-out;
     font-weight: 500;
+}
+
+select {
+    width: 100%;
+    background-color: #2c2c2c;
+    color: var(--primary-text);
+    border: 1px solid var(--border-color);
+    margin-bottom: 20px;
+}
+
+button {
     background-color: var(--accent-color);
     color: white;
 }
@@ -115,39 +177,24 @@ button:disabled {
     display: flex;
     gap: 15px;
     justify-content: center;
-    margin-bottom: 20px;
-}
-
-/* --- Screen-Specific Styles --- */
-#question-counter {
-    color: var(--secondary-text);
-    font-weight: 500;
+    margin-bottom: 10px;
 }
 
 #status {
-    min-height: 24px; /* Prevent layout shift */
+    min-height: 24px;
     font-style: italic;
     color: var(--secondary-text);
+    text-align: center;
 }
 
 #results {
-    background-color: rgba(0, 0, 0, 0.2);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 25px;
-    margin-top: 20px;
+    padding: 15px;
+    margin-top: 10px;
     text-align: left;
 }
 
 #results p {
-    margin: 12px 0;
-    color: var(--primary-text);
-    line-height: 1.6;
-}
-
-#results span {
-    font-weight: 700;
-    color: var(--accent-hover);
+    margin: 10px 0;
 }
 
 #results button {
@@ -155,18 +202,4 @@ button:disabled {
     display: block;
     width: 100%;
     background-color: var(--success-color);
-}
-
-.final-score-container {
-    font-size: 1.2rem;
-    background-color: rgba(74, 144, 226, 0.1);
-    border: 1px solid var(--accent-color);
-    padding: 15px;
-    border-radius: 8px;
-    margin: 20px 0;
-}
-
-#final-score {
-    color: var(--accent-hover);
-    font-weight: 700;
 }

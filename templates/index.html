@@ -3,58 +3,61 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mock Interview AI</title>
-    
+    <title>AI Mock Interview</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="/static/style.css" />
 </head>
 <body>
     <main class="container">
-        <h1>Mock Interview AI 🤖</h1>
-        <p class="subtitle">Hone your skills with AI-driven feedback.</p>
-
         <div id="domain-selection">
+            <h1>Mock Interview AI 🤖</h1>
+            <p class="subtitle">Hone your skills with AI-driven feedback.</p>
             <label for="domain">Select an Interview Domain:</label>
             <select id="domain">
-                {% for domain in domains %}
-                <option value="{{ domain }}">{{ domain }}</option>
-                {% endfor %}
+                <option value="Technical">Technical</option>
+                <option value="HR">HR</option>
             </select>
             <button onclick="startInterview()">Start Interview</button>
         </div>
 
         <div id="interview-screen" style="display: none;">
-            <p id="question-counter"></p>
-            <h2 id="question-text"></h2>
-            
-            <div class="button-group">
-                <button id="start-btn" onclick="startRecording()">Start Recording</button>
-                <button id="stop-btn" onclick="stopRecording()" disabled>Stop & Get Feedback</button>
+            <div class="panels">
+                <div class="panel" id="interviewer-panel">
+                    <img src="{{ url_for('static', filename='images/my-robot.png') }}" alt="AI Interviewer" id="interviewer-avatar">
+                    <p id="question-text"></p>
+                </div>
+                <div class="panel" id="user-panel">
+                    <video id="user-video" autoplay muted></video>
+                </div>
             </div>
-            
-            <p id="status"></p>
 
-            <div id="results" style="display: none;">
-                <p><strong>Transcript:</strong> <span id="transcript"></span></p>
-                <p><strong>Score:</strong> <span id="score"></span>/5</p>
-                <p><strong>Feedback:</strong> <span id="feedback"></span></p>
-                <button id="next-btn" onclick="askNextQuestion()">Next Question</button>
+            <div class="bottom-bar">
+                <p id="question-counter"></p>
+                <p id="status">Waiting for question...</p>
+                <div class="button-group">
+                    <button id="start-btn" onclick="startRecording()" disabled>Start Recording</button>
+                    <button id="stop-btn" onclick="stopRecording()" disabled>Stop & Get Feedback</button>
+                </div>
+                <div id="results" style="display: none;">
+                    <p><strong>Transcript:</strong> <span id="transcript"></span></p>
+                    <p><strong>Score:</strong> <span id="score"></span>/5</p>
+                    <p><strong>Feedback:</strong> <span id="feedback"></span></p>
+                    <button id="next-btn" onclick="askNextQuestion()">Next Question</button>
+                </div>
             </div>
         </div>
-        
-        <div id="summary-screen" style="display: none;">
-            <h2>Interview Complete! 🎉</h2>
-            <p>Well done. You've completed the interview for this domain.</p>
-            <p class="final-score-container">
-                <strong>Final Average Score: <span id="final-score"></span>/5</strong>
-            </p>
-            <button onclick="window.location.reload()">Start a New Interview</button>
+
+         <div id="summary-screen" style="display: none;">
+             <h2>Interview Complete! 🎉</h2>
+             <p>Well done!</p>
+             <p class="final-score-container">
+                 <strong>Final Average Score: <span id="final-score"></span>/5</strong>
+             </p>
+             <button onclick="window.location.reload()">Start a New Interview</button>
         </div>
     </main>
-
     <script src="/static/script.js"></script>
 </body>
 </html>
